@@ -1,0 +1,11 @@
+Model Information:
+* title:	A slice of pizza
+* source:	https://sketchfab.com/3d-models/a-slice-of-pizza-2ee2003561cd42789f6346ed1b65b2ef
+* author:	Aaron XR Dev (https://sketchfab.com/AaronXRdev)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "A slice of pizza" (https://sketchfab.com/3d-models/a-slice-of-pizza-2ee2003561cd42789f6346ed1b65b2ef) by Aaron XR Dev (https://sketchfab.com/AaronXRdev) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
