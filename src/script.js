@@ -1,6 +1,7 @@
 import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { TrackballControls } from "three/examples/jsm/controls/TrackballControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 // Canvas
@@ -31,11 +32,8 @@ loader.load(
       mesh.rotation.y = Math.random() * 2 * Math.PI;
       mesh.rotation.z = Math.random() * 2 * Math.PI;
 
-      // slice.scale.set(randomScale, randomScale, randomScale);
-
       slices.add(mesh);
     }
-    // scene.add(gltf.scene);
   },
   undefined,
   function (error) {
@@ -43,10 +41,12 @@ loader.load(
   }
 );
 
+let pizza = new THREE.Object3D();
+
 loader.load(
   "models/pizza/pizza.gltf",
   function (gltf) {
-    const pizza = gltf.scene;
+    pizza = gltf.scene;
     pizza.scale.set(6, 6, 6);
     slices.add(pizza);
   },
@@ -59,9 +59,7 @@ loader.load(
 scene.add(new THREE.AmbientLight(0xf7efa6, 1.1));
 scene.add(slices);
 
-/**
- * Sizes
- */
+// Sizes
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
@@ -81,9 +79,6 @@ window.addEventListener("resize", () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-/**
- * Camera
- */
 // Base camera
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -91,19 +86,18 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
-camera.position.x = 1;
-camera.position.y = 1;
-camera.position.z = 5;
+camera.position.x = 0;
+camera.position.y = 5;
+camera.position.z = 4;
 scene.add(camera);
 
 // Controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
+controls.autoRotate = true;
 controls.enableZoom = false;
 
-/**
- * Renderer
- */
+// Renderer
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
 });
@@ -115,11 +109,12 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 const clock = new THREE.Clock();
 
-window.addEventListener("mousemove", (e) => {
-  const x = (e.clientX / sizes.width) * 2 - 1;
-  const y = -(e.clientY / sizes.height) * 2 + 1;
+let mouseX = 0;
+let mouseY = 0;
 
-  slices.rotation.x = y * 0.5;
+window.addEventListener("mousemove", (e) => {
+  mouseX = (e.clientX / sizes.width) * 2 - 1;
+  mouseY = -(e.clientY / sizes.height) * 2 + 1;
 });
 
 const tick = () => {
@@ -128,7 +123,7 @@ const tick = () => {
   // Update controls
   controls.update();
 
-  slices.rotation.y = elapsedTime * 0.1;
+  pizza.rotation.y = elapsedTime * 0.2;
 
   // Render
   renderer.render(scene, camera);
