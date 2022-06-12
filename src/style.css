@@ -76,6 +76,10 @@ body {
   .hero {
     flex-direction: column;
     padding: 1rem;
+  }
+  .hero-title {
+    margin: 1rem 0 0 0;
+    padding: 2rem;
 
   }
   .title {
